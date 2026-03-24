@@ -157,8 +157,7 @@ class PortScanner(NetworkTool):
         try:
             conn = sqlite3.connect(DB_NAME)
             cursor = conn.cursor()
-            cursor.execute("""SELECT * FROM scans
-            """)
+            cursor.execute("""SELECT * FROM scans""")
             rows = cursor.fetchall()
             for row in rows:
                 print(f"[{row[5]}] {row[1]} : Port {row[2]} ({row[4]}) - {row[3]}")
@@ -202,11 +201,15 @@ if __name__ == "__main__":
 
     ps.save_results(ip, results)
 
-    inp = input("Would you like to see past scan history? (yes/no)")
+    inp = input("Would you like to see past scan history? (yes/no): ")
     if inp == "yes":
         ps.load_past_scans()
 
 
 # Q5: New Feature Proposal
-# TODO: Your 2-3 sentence description here... (Part 2, Q5)
-# Diagram: See diagram_studentID.png in the repository root
+"""
+A feature that can be added would be displaying scan results from 'scan_history.db'. 
+We already have a retrieval that displays everything but what if the user wants to display all results with a known port service (e.g. filter results by "FTP")
+List comprehension could be used with the existing method, load_past_scans(), to filter the results (a query can also achieve this too).
+E.g. filtered_rows = [row for row in rows if row[4] == service_name_filter]
+"""
